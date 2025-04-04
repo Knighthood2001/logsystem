@@ -14,6 +14,7 @@
 #include <sstream>
 #include <vector>
 #include <stdexcept>
+#include "utils.h"
 
 // 辅助函数。实现将单个参数转化成字符串
 //使用模板，因为这个参数可以是各种类型
@@ -110,7 +111,7 @@ private:
 		while (arg_index < args_strings.size()) {
 			oss << args_strings[arg_index++];
 		}
-		return oss.str(); 
+		return "[" + getCurrentTime() + "] " + oss.str();
 	}
 
 };

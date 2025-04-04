@@ -12,7 +12,7 @@ endif()
 project ("logsystem")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (logsystem "logsystem.cpp" "logsystem.h" "main.cpp")
+add_executable (logsystem "logsystem.cpp" "logsystem.h" "main.cpp" "utils.h" "utils.cpp")
 
 
 
