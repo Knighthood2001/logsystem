@@ -49,6 +49,9 @@ private:
 	bool is_shutdown_ = false;
 
 };
+enum class LogLevel {
+	INFO, DEBUG, WARN, ERROR
+};
 
 class Logger {
 public:
@@ -56,8 +59,26 @@ public:
 	~Logger();
 	//模板函数打印
 	template <typename ... Args>
-	void log(const std::string& format, Args&& ... args) {
-		log_queue_.push(formatMessage(format, std::forward<Args>(args)...));
+	void log(LogLevel loglevel, const std::string& format, Args&& ... args) {
+		std::string level_str;
+		switch (loglevel)
+		{
+		case LogLevel::INFO:
+			level_str = "[INFO] ";
+			break;
+		case LogLevel::DEBUG:
+			level_str = "[DEBUG] ";
+			break;
+		case LogLevel::WARN:
+			level_str = "[WARN] ";
+			break;
+		case LogLevel::ERROR:
+			level_str = "[ERROR] ";
+			break;
+		default:
+			break;
+		}
+		log_queue_.push(level_str + formatMessage(format, std::forward<Args>(args)...));
 	}
 	//打日志，只需要将这些参数，替换到format中就可以
 	//log("Hello {}, my name is {}", "zack", "jay"); 
